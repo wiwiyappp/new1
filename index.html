@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>记录你美好的精神状态 · 小清新日记本</title>
+  <style>
+    /* ================= 极简小清新 · 温暖日记本 ================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', 'Segoe UI', 'Roboto', system-ui, -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    }
+
+    body {
+      background: #faf8f3;          /* 温柔米白/淡奶黄底 */
+      color: #3d4a55;
+      min-height: 100vh;
+      padding: 2rem 1rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.6;
+      font-weight: 300;
+      position: relative;
+      letter-spacing: 0.01em;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(#e5ddd0 0.4px, transparent 0.4px);
+      background-size: 22px 22px;
+      opacity: 0.18;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .app-wrapper {
+      width: 100%;
+      max-width: 780px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ========== 主标题区 ========== */
+    .hero {
+      text-align: center;
+      margin-bottom: 2.4rem;
+    }
+
+    .hero h1 {
+      font-size: 2.3rem;
+      font-weight: 350;
+      letter-spacing: -0.02em;
+      color: #4d6677;
+      line-height: 1.3;
+      margin-bottom: 0.3rem;
+      word-break: break-word;
+    }
+
+    .hero .subtitle {
+      font-size: 0.92rem;
+      color: #9aaebb;
+      font-weight: 300;
+      letter-spacing: 0.3px;
+      font-style: italic;
+    }
+
+    @media (max-width: 500px) {
+      .hero h1 {
+        font-size: 1.6rem;
+      }
+      .hero .subtitle {
+        font-size: 0.78rem;
+      }
+    }
+
+    /* ========== 统计条 ========== */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 2.2rem;
+      background: #ffffffdd;
+      backdrop-filter: blur(3px);
+      padding: 0.9rem 1.8rem;
+      border-radius: 60px;
+      margin-bottom: 2.2rem;
+      box-shadow: 0 6px 18px rgba(180, 175, 160, 0.10);
+      border: 1px solid #f2ede4;
+      font-weight: 300;
+      color: #5e7585;
+      flex-wrap: wrap;
+    }
+
+    .stats-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+    }
+
+    .stats-value {
+      font-weight: 500;
+      font-size: 1.35rem;
+      color: #6e98a8;
+      margin-right: 0.15rem;
+    }
+
+    /* ========== 卡片通用 ========== */
+    .card {
+      background: #ffffff;
+      border-radius: 30px;
+      padding: 2.2rem 2rem;
+      margin-bottom: 2.2rem;
+      box-shadow: 0 10px 30px rgba(170, 165, 150, 0.10), 0 2px 8px rgba(180, 175, 160, 0.06);
+      border: 1px solid #f6f1e9;
+      transition: box-shadow 0.25s;
+    }
+
+    .card:hover {
+      box-shadow: 0 14px 36px rgba(160, 155, 140, 0.14);
+    }
+
+    /* ========== 表单 ========== */
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group {
+      flex: 1 1 160px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      color: #96aab8;
+      font-weight: 400;
+    }
+
+    input, select, textarea {
+      background: #fcfaf7;
+      border: 1px solid #ece6dc;
+      color: #3d4a55;
+      border-radius: 22px;
+      padding: 0.75rem 1.2rem;
+      font-size: 0.94rem;
+      outline: none;
+      transition: all 0.18s;
+      width: 100%;
+      appearance: none;
+      font-weight: 300;
+      font-family: inherit;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #b8d8c6;
+      box-shadow: 0 0 0 4px rgba(184, 216, 198, 0.18);
+      background: #ffffff;
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2396aab8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1.1rem center;
+      background-size: 16px;
+      padding-right: 2.5rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+      line-height: 1.55;
+    }
+
+    /* ========== 预设按钮 (柔和粉彩) ========== */
+    .preset-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.5rem 0 0.2rem;
+    }
+
+    .preset-btn {
+      background: #f8fbf9;
+      border: 1px solid #e3ede6;
+      color: #5e7e76;
+      padding: 0.42rem 1.05rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 300;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+      letter-spacing: 0.2px;
+      font-family: inherit;
+    }
+
+    .preset-btn:hover {
+      background: #edf5f0;
+      border-color: #c6dfd2;
+      transform: scale(1.02);
+    }
+
+    .preset-btn.active {
+      background: #cde8dc;
+      border-color: #b0d8c6;
+      color: #2c5346;
+      font-weight: 400;
+      box-shadow: 0 2px 10px rgba(160, 200, 180, 0.25);
+    }
+
+    /* ========== 自定义心情 ========== */
+    .custom-mood-wrapper {
+      margin-top: 0.9rem;
+      border-top: 1px dashed #ece6dc;
+      padding-top: 1.2rem;
+    }
+
+    .custom-mood-wrapper label {
+      color: #c28b6a;
+      font-size: 0.74rem;
+      letter-spacing: 0.8px;
+      display: block;
+      margin-bottom: 0.35rem;
+      font-weight: 400;
+    }
+
+    .custom-mood-input {
+      background: #fffdfa;
+      border: 1px solid #f0e4d8;
+      color: #6e5040;
+      font-weight: 300;
+    }
+
+    .custom-mood-input:focus {
+      border-color: #e6c9b2;
+      box-shadow: 0 0 0 4px rgba(230, 201, 178, 0.18);
+    }
+
+    /* ========== 提交按钮 (薄荷绿) ========== */
+    .submit-btn {
+      background: #b8e0d0;
+      border: 1px solid #d0ece0;
+      color: #1f4d3e;
+      font-weight: 400;
+      font-size: 1rem;
+      padding: 1.05rem 1.5rem;
+      border-radius: 40px;
+      width: 100%;
+      margin-top: 1.6rem;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 14px rgba(150, 195, 175, 0.18);
+      font-family: inherit;
+    }
+
+    .submit-btn:hover {
+      background: #a3d8c4;
+      box-shadow: 0 6px 18px rgba(140, 185, 165, 0.28);
+      transform: translateY(-1px);
+    }
+
+    .submit-btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 6px rgba(140, 185, 165, 0.2);
+    }
+
+    /* ========== 记录列表 ========== */
+    .records-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin: 1.8rem 0 1.1rem;
+      padding: 0 0.2rem;
+    }
+
+    .records-header h2 {
+      font-size: 1.15rem;
+      font-weight: 350;
+      color: #647e8c;
+      letter-spacing: 0.4px;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .records-header h2::before {
+      content: "✎";
+      font-size: 1.3rem;
+      color: #b0c4ce;
+      font-weight: 300;
+    }
+
+    .clear-hint {
+      font-size: 0.7rem;
+      color: #c2d4dc;
+      font-weight: 300;
+    }
+
+    .records-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .record-card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 1.5rem 1.7rem;
+      box-shadow: 0 6px 22px rgba(170, 165, 150, 0.09), 0 1px 4px rgba(180, 175, 160, 0.05);
+      border: 1px solid #f5f0e8;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: box-shadow 0.22s;
+    }
+
+    .record-card:hover {
+      box-shadow: 0 10px 30px rgba(150, 145, 130, 0.15);
+    }
+
+    .record-content {
+      flex: 1 1 260px;
+    }
+
+    .record-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.2rem;
+      font-size: 0.72rem;
+      color: #a0b4c0;
+      letter-spacing: 0.3px;
+      margin-bottom: 0.6rem;
+      font-weight: 300;
+    }
+
+    .record-date {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: #87a2b2;
+      font-weight: 350;
+    }
+
+    .record-date::before {
+      content: "📅";
+      font-size: 0.75rem;
+      filter: grayscale(0.2) brightness(0.95);
+    }
+
+    .record-time {
+      background: #f5fbf9;
+      padding: 0.18rem 0.85rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      color: #7e9d9c;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-weight: 300;
+    }
+
+    .record-time::before {
+      content: "⏱";
+      font-size: 0.7rem;
+      opacity: 0.7;
+    }
+
+    .record-mood {
+      display: inline-block;
+      padding: 0.32rem 1.15rem;
+      border-radius: 40px;
+      font-weight: 350;
+      font-size: 0.9rem;
+      letter-spacing: 0.2px;
+      line-height: 1.45;
+      margin-bottom: 0.3rem;
+      border: 1px solid transparent;
+    }
+
+    .record-card:nth-child(3n+1) .record-mood {
+      background: #fbeae6;
+      color: #a97462;
+      border-color: #f5d9d1;
+    }
+
+    .record-card:nth-child(3n+2) .record-mood {
+      background: #e9f1fa;
+      color: #61819b;
+      border-color: #d6e4f2;
+    }
+
+    .record-card:nth-child(3n) .record-mood {
+      background: #ebf5ee;
+      color: #638a70;
+      border-color: #d4e9da;
+    }
+
+    .record-reason {
+      margin-top: 0.7rem;
+      font-size: 0.9rem;
+      color: #748c9b;
+      background: #fbfdfc;
+      padding: 0.65rem 1.1rem;
+      border-radius: 20px;
+      border-left: 3px solid #e3efe9;
+      line-height: 1.55;
+      word-break: break-word;
+      font-weight: 300;
+    }
+
+    .record-reason::before {
+      content: "✏️ 原因 · ";
+      font-size: 0.7rem;
+      color: #a5b8c2;
+      font-weight: 350;
+      letter-spacing: 0.3px;
+    }
+
+    .delete-btn {
+      background: transparent;
+      border: 1px solid #eae3d8;
+      color: #c2b6a6;
+      font-size: 1rem;
+      line-height: 1;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.18s;
+      flex-shrink: 0;
+      font-weight: 300;
+    }
+
+    .delete-btn:hover {
+      background: #fbeae6;
+      border-color: #f0c8bd;
+      color: #c07966;
+      box-shadow: 0 2px 10px rgba(210, 150, 135, 0.15);
+    }
+
+    .empty-message {
+      text-align: center;
+      padding: 3.2rem 1.5rem;
+      background: #ffffff;
+      border-radius: 30px;
+      border: 1px dashed #e5ddd0;
+      color: #a9bcc8;
+      font-style: italic;
+      font-size: 0.95rem;
+      letter-spacing: 0.3px;
+      font-weight: 300;
+      box-shadow: 0 4px 18px rgba(180, 175, 160, 0.07);
+    }
+
+    .empty-message span {
+      display: block;
+      font-size: 2.2rem;
+      margin-bottom: 0.8rem;
+      opacity: 0.8;
+    }
+
+    /* ================= 治愈报告区域 ================= */
+    .report-section {
+      margin-top: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .report-trigger-card {
+      background: linear-gradient(145deg, #ffffff, #fdfbf7);
+      border-radius: 30px;
+      padding: 2rem 2rem 1.8rem;
+      text-align: center;
+      box-shadow: 0 8px 26px rgba(170, 165, 150, 0.10);
+      border: 1px solid #f5f0e8;
+    }
+
+    .report-trigger-card p {
+      font-size: 0.9rem;
+      color: #8fa5b2;
+      margin-bottom: 1.2rem;
+      font-weight: 300;
+      letter-spacing: 0.2px;
+    }
+
+    .report-btn {
+      background: #f2e9de;
+      border: 1px solid #e8ddce;
+      color: #7a6652;
+      font-weight: 400;
+      font-size: 0.98rem;
+      padding: 0.95rem 2.2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      letter-spacing: 0.4px;
+      transition: all 0.22s;
+      font-family: inherit;
+      box-shadow: 0 4px 12px rgba(180, 165, 145, 0.10);
+    }
+
+    .report-btn:hover {
+      background: #ede0d2;
+      box-shadow: 0 6px 18px rgba(170, 155, 135, 0.18);
+      transform: translateY(-1px);
+    }
+
+    .report-btn:active {
+      transform: translateY(1px);
+    }
+
+    .report-result {
+      margin-top: 1.6rem;
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 1.8rem 1.8rem;
+      box-shadow: 0 8px 26px rgba(170, 165, 150, 0.09);
+      border: 1px solid #f5f0e8;
+      animation: fadeSlide 0.4s ease;
+    }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .report-result h3 {
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: #5f7e8c;
+      margin-bottom: 1rem;
+      letter-spacing: 0.4px;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .report-result h3::before {
+      content: "🩺";
+      font-size: 1.1rem;
+    }
+
+    .report-data {
+      background: #fcfaf7;
+      border-radius: 20px;
+      padding: 1.2rem 1.4rem;
+      font-size: 0.92rem;
+      color: #6a8291;
+      line-height: 1.8;
+      margin-bottom: 1.4rem;
+      border-left: 3px solid #e8f0ea;
+      font-weight: 300;
+    }
+
+    .report-data strong {
+      font-weight: 500;
+      color: #4d6a7a;
+    }
+
+    .report-summary {
+      background: #f3faf6;
+      border-radius: 20px;
+      padding: 1.3rem 1.5rem;
+      font-size: 0.95rem;
+      color: #4e7562;
+      line-height: 1.85;
+      border-left: 3px solid #cfe8da;
+      font-weight: 300;
+      letter-spacing: 0.2px;
+    }
+
+    .report-summary::before {
+      content: "🌿 ";
+      font-size: 1rem;
+    }
+
+    .report-empty {
+      color: #a9bcc8;
+      font-style: italic;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    @media (max-width: 550px) {
+      body {
+        padding: 1.6rem 0.9rem 2.8rem;
+      }
+      .card {
+        padding: 1.6rem 1.3rem;
+        border-radius: 26px;
+      }
+      .record-card {
+        padding: 1.3rem 1.2rem;
+        border-radius: 24px;
+        flex-direction: column;
+      }
+      .delete-btn {
+        align-self: flex-end;
+        margin-top: -0.5rem;
+      }
+      .stats {
+        gap: 1.3rem;
+        padding: 0.7rem 1.2rem;
+      }
+      .stats-value {
+        font-size: 1.1rem;
+      }
+      .submit-btn {
+        padding: 0.95rem 1.2rem;
+        font-size: 0.95rem;
+      }
+      .report-trigger-card {
+        padding: 1.6rem 1.2rem;
+      }
+      .report-result {
+        padding: 1.3rem 1.2rem;
+      }
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f5f1ea;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #d8d0c4;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #c6bcae;
+    }
+
+    ::selection {
+      background: #d8ece2;
+      color: #2e4e42;
+    }
+  </style>
+</head>
+<body>
+<div class="app-wrapper">
+  <!-- ========= 主标题 ========= -->
+  <div class="hero">
+    <h1>记录你美好的精神状态</h1>
+    <div class="subtitle">（今天也是一枚情绪稳定的成年牛马呢 ^_^ ）</div>
+  </div>
+
+  <!-- 统计 -->
+  <div class="stats">
+    <div class="stats-item">
+      <span class="stats-value" id="todayCount">0</span> 今日发疯
+    </div>
+    <div class="stats-item">
+      <span class="stats-value" id="topMood">—</span>
+    </div>
+  </div>
+
+  <!-- 录入卡片 -->
+  <div class="card">
+    <div class="form-row">
+      <div class="form-group">
+        <label>📅 日期</label>
+        <input type="date" id="recordDate">
+      </div>
+      <div class="form-group">
+        <label>⏰ 时间段</label>
+        <select id="timeSlot">
+          <option value="凌晨修仙">凌晨修仙 (00:00-06:00)</option>
+          <option value="早八怨气">早八怨气 (06:00-09:00)</option>
+          <option value="上午牛马">上午牛马 (09:00-12:00)</option>
+          <option value="午休苟活">午休苟活 (12:00-14:00)</option>
+          <option value="下午摆烂">下午摆烂 (14:00-18:00)</option>
+          <option value="晚上回血">晚上回血 (18:00-22:00)</option>
+          <option value="深夜发疯">深夜发疯 (22:00-24:00)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>⏱️ 具体时间 (分钟)</label>
+        <input type="time" id="exactTime" value="12:00">
+      </div>
+    </div>
+
+    <!-- 预设精神状态 -->
+    <div class="form-group" style="margin-bottom: 0.2rem;">
+      <label>💭 精神状态 (点选或自定义)</label>
+    </div>
+    <div class="preset-grid" id="presetGrid"></div>
+
+    <!-- 自定义心情 -->
+    <div class="custom-mood-wrapper">
+      <label>✍️ 自定义更抽象的描述 (会覆盖预设)</label>
+      <input type="text" id="customMood" class="custom-mood-input" placeholder="例如：表面稳如老狗内心疯狗乱咬 / 假装情绪稳定 ...">
+    </div>
+
+    <!-- 原因描述 -->
+    <div class="form-group" style="margin-top: 1.2rem;">
+      <label>📝 为什么是这个精神状态？</label>
+      <textarea id="reasonInput" placeholder="被DDL追杀 / 被老板PUA / 代码又跑崩了 / 小组作业带飞全队..."></textarea>
+    </div>
+
+    <button class="submit-btn" id="submitBtn">
+      🌿 记录我美好的今天
+    </button>
+  </div>
+
+  <!-- 记录列表 -->
+  <div class="records-header">
+    <h2>发疯档案</h2>
+    <div class="clear-hint">按日期倒序</div>
+  </div>
+  <div id="recordsList" class="records-list"></div>
+
+  <!-- ================= 治愈报告 ================= -->
+  <div class="report-section">
+    <div class="report-trigger-card">
+      <p>🎈 想回顾一下最近的“美好”精神状态吗？</p>
+      <button class="report-btn" id="generateReportBtn">🩺 生成我的精神体检报告</button>
+    </div>
+    <div id="reportResultContainer"></div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ======================= 预设精神状态 =======================
+    const PRESET_MOODS = [
+      "灵魂出窍",
+      "随时准备破防",
+      "表面稳如老狗内心疯狗乱咬",
+      "行尸走肉",
+      "苟延残喘",
+      "想毁灭世界",
+      "牛马本马",
+      "假装情绪稳定",
+      "绝赞崩溃中",
+      "发出不可名状的嘶吼",
+      "大脑已宕机",
+      "礼貌性活着",
+      "地狱笑话预备役",
+      "间歇性踌躇满志，持续性混吃等死"
+    ];
+
+    let selectedPreset = PRESET_MOODS[0];
+
+    // ======================= DOM =======================
+    const recordDateInput = document.getElementById('recordDate');
+    const timeSlotSelect = document.getElementById('timeSlot');
+    const exactTimeInput = document.getElementById('exactTime');
+    const customMoodInput = document.getElementById('customMood');
+    const reasonTextarea = document.getElementById('reasonInput');
+    const presetGrid = document.getElementById('presetGrid');
+    const submitBtn = document.getElementById('submitBtn');
+    const recordsListDiv = document.getElementById('recordsList');
+    const todayCountSpan = document.getElementById('todayCount');
+    const topMoodSpan = document.getElementById('topMood');
+    const generateReportBtn = document.getElementById('generateReportBtn');
+    const reportResultContainer = document.getElementById('reportResultContainer');
+
+    // ======================= 工具函数 =======================
+    function generateId() {
+      return Date.now() + '-' + Math.random().toString(36).substring(2, 10);
+    }
+
+    function getTodayString() {
+      const d = new Date();
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    }
+
+    function getCurrentMonthString() {
+      const d = new Date();
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+    }
+
+    function loadRecords() {
+      const raw = localStorage.getItem('mentalStateRecords');
+      if (!raw) return [];
+      try {
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        console.warn('读取记录失败', e);
+        return [];
+      }
+    }
+
+    function saveRecords(records) {
+      localStorage.setItem('mentalStateRecords', JSON.stringify(records));
+    }
+
+    // ======================= 渲染预设按钮 =======================
+    function renderPresetButtons() {
+      presetGrid.innerHTML = '';
+      PRESET_MOODS.forEach(mood => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'preset-btn' + (mood === selectedPreset ? ' active' : '');
+        btn.textContent = mood;
+        btn.dataset.mood = mood;
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          selectedPreset = mood;
+          customMoodInput.value = '';
+        });
+        presetGrid.appendChild(btn);
+      });
+    }
+
+    // ======================= 统计 =======================
+    function updateStats(records) {
+      const todayStr = getTodayString();
+      const todayRecords = records.filter(r => r.date === todayStr);
+      todayCountSpan.textContent = todayRecords.length;
+
+      const currentMonth = getCurrentMonthString();
+      const monthRecords = records.filter(r => r.date && r.date.startsWith(currentMonth));
+      if (monthRecords.length === 0) {
+        topMoodSpan.textContent = '—';
+        return;
+      }
+
+      const moodCount = {};
+      monthRecords.forEach(r => {
+        const mood = r.finalMood || r.presetMood || '未知';
+        moodCount[mood] = (moodCount[mood] || 0) + 1;
+      });
+
+      let maxCount = 0;
+      let topMood = '—';
+      for (const [mood, count] of Object.entries(moodCount)) {
+        if (count > maxCount) {
+          maxCount = count;
+          topMood = mood;
+        }
+      }
+      topMoodSpan.textContent = maxCount > 0 ? topMood : '—';
+    }
+
+    // ======================= 渲染记录 =======================
+    function renderRecords(records) {
+      const sorted = [...records].sort((a, b) => {
+        if (a.date !== b.date) return b.date.localeCompare(a.date);
+        return (b.createdAt || 0) - (a.createdAt || 0);
+      });
+
+      if (sorted.length === 0) {
+        recordsListDiv.innerHTML = `<div class="empty-message"><span>🌸</span>暂无记录，今天的精神状态非常稳定？（真的吗）</div>`;
+        return;
+      }
+
+      let html = '';
+      sorted.forEach(rec => {
+        const displayMood = rec.customMood && rec.customMood.trim() !== '' 
+          ? rec.customMood.trim() 
+          : (rec.presetMood || '未知状态');
+        const dateDisplay = rec.date || '未知日期';
+        const timeDisplay = `${rec.timeSlot || ''} ${rec.exactTime || ''}`.trim();
+        const reasonDisplay = rec.reason && rec.reason.trim() !== '' 
+          ? rec.reason.trim() 
+          : '（未填写原因，也许是纯粹的疯）';
+
+        const escapeHtml = (str) => {
+          if (!str) return '';
+          return str.replace(/[&<>"]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            if (m === '"') return '&quot;';
+            return m;
+          });
+        };
+
+        html += `
+          <div class="record-card" data-id="${rec.id}">
+            <div class="record-content">
+              <div class="record-meta">
+                <span class="record-date">${escapeHtml(dateDisplay)}</span>
+                <span class="record-time">${escapeHtml(timeDisplay)}</span>
+              </div>
+              <div class="record-mood">${escapeHtml(displayMood)}</div>
+              <div class="record-reason">${escapeHtml(reasonDisplay)}</div>
+            </div>
+            <button class="delete-btn" data-id="${rec.id}" title="删除记录">✕</button>
+          </div>
+        `;
+      });
+
+      recordsListDiv.innerHTML = html;
+
+      document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          deleteRecordById(this.dataset.id);
+        });
+      });
+    }
+
+    function deleteRecordById(id) {
+      const records = loadRecords();
+      const newRecords = records.filter(r => r.id !== id);
+      saveRecords(newRecords);
+      refreshUI();
+    }
+
+    function refreshUI() {
+      const records = loadRecords();
+      renderRecords(records);
+      updateStats(records);
+    }
+
+    function setDefaultDate() {
+      recordDateInput.value = getTodayString();
+    }
+
+    // ======================= 提交 =======================
+    function handleSubmit(e) {
+      e.preventDefault();
+
+      const date = recordDateInput.value.trim();
+      if (!date) {
+        alert('请选择日期，哪怕是发疯也要有日期！');
+        return;
+      }
+
+      const timeSlot = timeSlotSelect.value;
+      const exactTime = exactTimeInput.value.trim() || '00:00';
+      const customMood = customMoodInput.value.trim();
+      const finalMood = customMood !== '' ? customMood : selectedPreset;
+      const reason = reasonTextarea.value.trim();
+
+      const newRecord = {
+        id: generateId(),
+        date: date,
+        timeSlot: timeSlot,
+        exactTime: exactTime,
+        presetMood: selectedPreset,
+        customMood: customMood,
+        finalMood: finalMood,
+        reason: reason,
+        createdAt: Date.now()
+      };
+
+      const records = loadRecords();
+      records.push(newRecord);
+      saveRecords(records);
+
+      reasonTextarea.value = '';
+      customMoodInput.value = '';
+
+      refreshUI();
+    }
+
+    // ======================= 治愈报告生成 =======================
+    function generateReport() {
+      const records = loadRecords();
+      const totalCount = records.length;
+
+      if (totalCount === 0) {
+        reportResultContainer.innerHTML = `
+          <div class="report-result">
+            <h3>精神体检报告</h3>
+            <div class="report-empty">📭 还没有任何记录呢…… 先去记录一下你“美好”的精神状态吧～</div>
+          </div>
+        `;
+        return;
+      }
+
+      // 统计：最常精神状态
+      const moodCount = {};
+      records.forEach(r => {
+        const mood = r.finalMood || r.presetMood || '未知';
+        moodCount[mood] = (moodCount[mood] || 0) + 1;
+      });
+      let topMood = '—';
+      let topMoodCount = 0;
+      for (const [mood, count] of Object.entries(moodCount)) {
+        if (count > topMoodCount) {
+          topMoodCount = count;
+          topMood = mood;
+        }
+      }
+
+      // 统计：最常发疯原因
+      const reasonCount = {};
+      records.forEach(r => {
+        const reason = (r.reason && r.reason.trim() !== '') ? r.reason.trim() : '（未填写原因）';
+        reasonCount[reason] = (reasonCount[reason] || 0) + 1;
+      });
+      let topReason = '—';
+      let topReasonCount = 0;
+      for (const [reason, count] of Object.entries(reasonCount)) {
+        if (count > topReasonCount) {
+          topReasonCount = count;
+          topReason = reason;
+        }
+      }
+
+      // 刻薄数据部分
+      const snarkyData = `
+        📊 你一共记录了 <strong>${totalCount}</strong> 次精神状态。<br>
+        🏆 最常陷入的状态是 <strong>“${topMood}”</strong>，出现了 <strong>${topMoodCount}</strong> 次。<br>
+        💥 最常用来“解释”自己的理由是：<strong>“${topReason}”</strong>（${topReasonCount}次）。
+      `;
+
+      // 治愈总结部分
+      const healingSummary = `
+        虽然你经常觉得${topMood}，但你都坚持活到了今天，辛苦了！<br>
+        每一次记录都是你认真生活的证据。建议今晚奖励自己一顿好吃的，早点休息，明天又是新的一天。<br>
+        记得，你比你的精神状态更强大。🌱
+      `;
+
+      reportResultContainer.innerHTML = `
+        <div class="report-result">
+          <h3>精神体检报告</h3>
+          <div class="report-data">${snarkyData}</div>
+          <div class="report-summary">${healingSummary}</div>
+        </div>
+      `;
+    }
+
+    // ======================= 初始化 =======================
+    function init() {
+      setDefaultDate();
+      renderPresetButtons();
+      refreshUI();
+      submitBtn.addEventListener('click', handleSubmit);
+      generateReportBtn.addEventListener('click', generateReport);
+
+      customMoodInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+        }
+      });
+    }
+
+    init();
+  })();
+</script>
+</body>
+</html>
